@@ -43,14 +43,14 @@ public class EstudanteController {
 	}
 	
     @PutMapping("/{id}")
-	public ResponseEntity<Estudante> atualizarEstudante(@RequestParam Estudante estudante) {
+	public ResponseEntity<Estudante> atualizarEstudante(@PathVariable Long id, @RequestBody Estudante estudante) {
         return estudanteService.atualizarEstudante(estudante);
-
 	}
+
 	@DeleteMapping("/{id}")
-	public ResponseEntity<String> removerEstudante(@RequestParam Long id) {
+    public ResponseEntity<String> removerEstudante(@PathVariable Long id) {
         return estudanteService.removerEstudante(id);
+    }
 
-	}
 
 }
