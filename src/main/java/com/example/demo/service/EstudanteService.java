@@ -10,11 +10,14 @@ import org.springframework.http.ResponseEntity;
 
 import com.example.demo.entity.Estudante;
 
-public class Service {
+import org.springframework.stereotype.Service;
+
+@Service
+public class EstudanteService {
+
+	public static Map<Long, Estudante> listaEstudantes = new HashMap<>();
 	
-	private static Map<Long, Estudante> listaEstudantes = new HashMap<>();
-	
-	private ResponseEntity<Estudante> buscarEstudantePorId(Long id) {
+	public ResponseEntity<Estudante> buscarEstudantePorId(Long id) {
 		Estudante estudante = listaEstudantes.get(id);
 		if(estudante == null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
@@ -22,11 +25,11 @@ public class Service {
 		return ResponseEntity.status(HttpStatus.OK).body(estudante);
 	}
 	
-	private List<Estudante> buscarTodosEstudantes() {
+	public List<Estudante> buscarTodosEstudantes() {
 		return new ArrayList<>(listaEstudantes.values());
 	}
 	
-	private ResponseEntity<Estudante> cadastrarEstudante(Estudante estudante) {
+	public ResponseEntity<Estudante> cadastrarEstudante(Estudante estudante) {
 		Estudante estudanteEncontrado = listaEstudantes.get(estudante.getId());
 		if(estudanteEncontrado == null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
@@ -34,7 +37,7 @@ public class Service {
 		return ResponseEntity.status(HttpStatus.OK).body(estudanteEncontrado);
 	}
 	
-	private ResponseEntity<Estudante> atualizarEstudante(Estudante estudante) {
+	public ResponseEntity<Estudante> atualizarEstudante(Estudante estudante) {
 		Estudante estudanteEncontrado = listaEstudantes.get(estudante.getId());
 		if(estudanteEncontrado == null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
@@ -43,7 +46,7 @@ public class Service {
 		return ResponseEntity.status(HttpStatus.OK).body(estudanteEncontrado);
 	}
 	
-	private ResponseEntity<String> deletarEstudante(Long id) {
+	public ResponseEntity<String> removerEstudante(Long id) {
 		Estudante estudanteEncontrado = listaEstudantes.get(id);
 		if(estudanteEncontrado == null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
