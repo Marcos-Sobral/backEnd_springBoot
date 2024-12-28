@@ -30,11 +30,8 @@ public class EstudanteService {
 	}
 	
 	public ResponseEntity<Estudante> cadastrarEstudante(Estudante estudante) {
-		Estudante estudanteEncontrado = listaEstudantes.get(estudante.getId());
-		if(estudanteEncontrado == null) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-		}
-		return ResponseEntity.status(HttpStatus.OK).body(estudanteEncontrado);
+		listaEstudantes.put(estudante.getId(), estudante);
+		return ResponseEntity.status(HttpStatus.OK).body(estudante);
 	}
 	
 	public ResponseEntity<Estudante> atualizarEstudante(Estudante estudante) {
